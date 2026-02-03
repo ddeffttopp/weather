@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 200px;
+  background: #171717;
+
+  .title {
+    font-size: 18px;
+    color: #e1dcd2;
+  }
+}

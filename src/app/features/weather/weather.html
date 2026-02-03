@@ -1,0 +1,33 @@
+<div class="weather-container">
+  <div class="search">
+    <input
+      type="text"
+      placeholder="{{ 'weather.searchPlaceholder' | translate }}"
+      [value]="city()"
+      (input)="city.set($any($event.target).value)"
+      (keyup.enter)="submit()"
+    />
+    <button (click)="submit()" [disabled]="loading()">
+      {{ 'weather.getWeather' | translate }}
+    </button>
+  </div>
+
+  @if (loading()) {
+    <p class="loading">{{ 'weather.loading' | translate }}</p>
+  }
+
+  @if (reactiveError()) {
+    <p class="error">{{ reactiveError() }}</p>
+  }
+
+  @if (viewModel()) {
+    <div class="weather-card" [ngClass]="'weather-' + viewModel()?.weatherCode">
+      <div class="temperature">{{ viewModel()?.temperature }}°C</div>
+      <div class="details">
+        <p>💧 {{ 'weather.humidity' | translate }}: {{ viewModel()?.humidity }}%</p>
+        <p>🌬 {{ 'weather.wind' | translate }}: {{ viewModel()?.windSpeed }} km/h</p>
+        <p>🌦 {{ viewModel()?.conditionText }}</p>
+      </div>
+    </div>
+  }
+</div>
